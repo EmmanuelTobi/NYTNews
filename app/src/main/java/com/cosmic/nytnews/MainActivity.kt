@@ -14,12 +14,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cosmic.nytnews.model.SampleModels
 import com.cosmic.nytnews.ui.theme.NYTNewsTheme
+import com.cosmic.nytnews.viewmodel.NewsViewmodel
+import androidx.lifecycle.viewmodel.compose.viewModel
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,57 +36,54 @@ class MainActivity : ComponentActivity() {
                 .height(50.dp)
             )
             NYTNewsTheme {
-                Greeting(
-                    greetings = listOf(
-                        SampleModels.Greetings(greetings = "Hello", phoneNumber = "123-456-7890"),
-                        SampleModels.Greetings(greetings = "We are sending this to you", phoneNumber = "123-456-7890"),
-                        SampleModels.Greetings(greetings = "Hello", phoneNumber = "123-456-7890"),
-                        SampleModels.Greetings(greetings = "Hello", phoneNumber = "123-456-7890"),
-                        SampleModels.Greetings(greetings = "We are sending this to you", phoneNumber = "123-456-7890"),
-                    )
-                )
+                Greeting()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(greetings: List<SampleModels.Greetings>? = null) {
+fun Greeting(newsViewModel: NewsViewmodel = viewModel()) {
 
-    if (greetings != null) {
+    val posts by newsViewModel.getNewsPosts.observeAsState()
+    val error by newsViewModel.error.observeAsState()
 
-        LazyColumn (
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            contentPadding = PaddingValues(16.dp)
-        ) {
-            items(greetings) { item ->
-                GreetingsView( SampleModels.Greetings(
-                    greetings = item.greetings,
-                    phoneNumber = item.phoneNumber,
-                ))
-            }
-        }
+    if (error != null) {
+
+        Text(text = "Error: $error")
 
     } else {
 
-        GreetingsView(SampleModels.Greetings(
-            greetings = "We are sending this to you",
-            phoneNumber = "123-456-7890",
-        ))
+        if (posts != null) {
+
+            LazyColumn (
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                contentPadding = PaddingValues(16.dp)
+            ) {
+                items(posts!!.results) { item ->
+                    NewsPostListItem( item.title, item.abstract)
+                }
+            }
+
+        } else {
+
+            Text(text = "Currently no news posts at the moment")
+
+        }
 
     }
 
 }
 
 @Composable
-fun GreetingsView(samples: SampleModels.Greetings? = null) {
+fun NewsPostListItem(title:String, abstract:String) {
     Column {
         Text(
-            text = samples!!.greetings!!,
+            text = title,
             fontSize = 24.sp
         )
         Text(
-            text = samples.phoneNumber!!,
+            text = abstract,
             fontSize = 14.sp,
         )
     }
@@ -91,11 +93,6 @@ fun GreetingsView(samples: SampleModels.Greetings? = null) {
 @Composable
 fun GreetingPreview() {
     NYTNewsTheme {
-        Greeting(greetings = listOf(
-            SampleModels.Greetings(greetings = "Hello", phoneNumber = "123-456-7890"),
-            SampleModels.Greetings(greetings = "We are sending this to you", phoneNumber = "123-456-7890"),
-            SampleModels.Greetings(greetings = "Hello", phoneNumber = "123-456-7890"),
-            SampleModels.Greetings(greetings = "Hello", phoneNumber = "123-456-7890"),
-        ))
+        Greeting()
     }
 }
