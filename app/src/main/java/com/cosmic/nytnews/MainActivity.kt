@@ -23,6 +23,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.magnifier
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
@@ -50,6 +51,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -118,6 +120,7 @@ fun NewsBody(newsViewModel: NewsViewmodel = viewModel()) {
             is ResultState.Success -> {
 
                 LazyColumn (
+                    modifier = Modifier.testTag("NewsItems"),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
                     contentPadding = PaddingValues(16.dp)
                 ) {
@@ -243,6 +246,7 @@ fun MinimalDropdownMenu(onDaysSelected: ((days:String) -> Unit?)?, newsViewModel
 fun LoadingView() {
     Box(
         modifier = Modifier
+            .testTag("LoadingIndicator")
             .fillMaxSize()
             .padding(16.dp),
         contentAlignment = Alignment.Center
