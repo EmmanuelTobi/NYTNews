@@ -99,7 +99,7 @@ class MainActivity : ComponentActivity() {
                             Unit
                         })
                     }
-                    Greeting()
+                    NewsBody()
                 }
             }
         }
@@ -107,7 +107,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(newsViewModel: NewsViewmodel = viewModel()) {
+fun NewsBody(newsViewModel: NewsViewmodel = viewModel()) {
 
     val posts by newsViewModel.getNewsPosts.observeAsState()
     var selectedNewsItem by remember { mutableStateOf<NYTimesNewsModel.Result?>(null) }
@@ -379,7 +379,7 @@ fun GreetingPreview() {
 
                 })
             }
-            Greeting()
+            NewsBody()
         }
     }
 }
