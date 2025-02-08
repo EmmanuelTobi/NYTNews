@@ -54,3 +54,35 @@ This project utilizes a `local.properties` file to manage sensitive information,
 1.  **Create `local.properties`:** If it doesn't exist (Note: Android studio will always automatically create this), create a file named `local.properties` in the root directory of your project.
 2.  **Add Properties:** Add your API keys or other sensitive information to this file in the format `key=value`. In this project's case, we added NYTimesAPIKey="{{Your news api key}}"
 3.  **Clean and rebuild:** Clea and Rebuild the project again to access NYTimesAPIKey in the BuildConfig
+
+## Testing
+
+This project includes comprehensive UI tests written using Jetpack Compose UI testing framework. These tests verify the behavior and appearance of the app's UI.
+
+### Test Coverage
+
+The following aspects of the UI are covered by the tests:
+
+*   **Main Screen Elements:**
+    *   The app title ("NYTimes News") is displayed.
+    *   The default selected day ("Yesterday") is displayed.
+*   **Dropdown Menu Button:**
+    *   The dropdown menu button (an `IconButton`) is displayed.
+    *   The dropdown menu button has the correct content description ("More options").
+*   **Dropdown Menu Functionality:**
+    *   Clicking the dropdown menu button opens the menu.
+    *   All menu items ("Yesterday", "Last 7 days", "Last 30 days") are displayed in the menu.
+    *   Selecting a menu item updates the displayed date filter.
+*   **Loading and News Display:**
+    *   The loading indicator is displayed while data is being fetched.
+    *   The loading indicator disappears when data is loaded.
+    *   News items are displayed after the data is loaded.
+
+### Running the Tests
+
+To run the UI tests:
+
+1.  Open the project in Android Studio.
+2.  Go to the `androidTest` directory (`app/src/androidTest/java/com/cosmic/nytnews`).
+3.  Right-click on the `ExampleInstrumentedTest.kt` file.
+4.  Select "Run 'testDropdownMenu'" or run all the test.
