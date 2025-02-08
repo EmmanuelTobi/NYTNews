@@ -12,6 +12,14 @@ This is a simple Android application that fetches and displays the most popular 
 *   **Error Handling:** Displays an error message if there's a problem fetching the news.
 * **Modern UI:** The app uses Jetpack Compose to create a modern and responsive user interface.
 
+-------
+
+<img src="https://github.com/user-attachments/assets/677614b9-0b78-44c6-9fdd-3ab56ae9dcd6" height="400" alt="Screenshot"/>
+<img src="https://github.com/user-attachments/assets/54f8d48e-b2e1-4c47-9763-4c7cea249642" height="400" alt="Screenshot"/>
+<img src="https://github.com/user-attachments/assets/e1f8f03e-bfc5-438a-be53-e4a292c30167" height="400" alt="Screenshot"/>
+<img src="https://github.com/user-attachments/assets/782d26af-01d7-4a37-8c49-0a24189f2fb3" height="400" alt="Screenshot"/>
+<img src="https://github.com/user-attachments/assets/dcd38a4e-9371-4c72-8730-9005059cbecb" height="400" alt="Screenshot"/>
+
 ## Tech Stack
 
 *   **Kotlin:** The primary programming language.
